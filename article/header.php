@@ -32,7 +32,7 @@
         <div class="container">
             <div class="logo">
                 <a href="index.php">
-                    <h3>JONGDENG NEWS</h3>
+                    <img width="300" src="../admin/assets/icon/<?php echo get_logo('header') ?>" alt="<?php echo get_logo('header') ?>">
                 </a>
             </div>
             <ul class="menu">

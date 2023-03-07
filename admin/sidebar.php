@@ -1,3 +1,6 @@
+<?php 
+    require('function.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +36,14 @@
                         </div>
                         <div class="wrap-center">
                           <?php 
-                            include_once('function.php')
+                            $admin_id = $_SESSION['user'];
+                            $sql_admin = "SELECT username,profile FROM `tbl_user` WHERE $admin_id";
+                            $res = $con->query($sql_admin);
+                            $row = $res->fetch_assoc();
+                            echo'
+                                <img width="50" src="assets/icon/'.$row['profile'].'" alt="'.$row['profile'].'">
+                                <h6>Welcome to Admin '.$row['username'].'</h6>
+                            ';
                           ?>  
                         </div>
                         <div class="wrap-bottom">
@@ -74,7 +84,7 @@
                                     </a>
                                     <ul class="child">
                                         <li>
-                                            <a href="view-post.php">View Logo</a>
+                                            <a href="view-logo.php">View Logo</a>
                                             <a href="add-logo.php">Add Logo</a>
                                         </li>
                                     </ul>

@@ -1,7 +1,27 @@
-<?php
-    unset($_SESSION['user']);
 
-    if(!($_SESSION['user'])){
-        header('location: login.php');
-    }
+<?php 
+    include_once('function.php');
+    include('sidebar.php');
 ?>
+                <div class="col-10">
+                    <div class="content-right">
+                        <div class="top">
+                            <h3>Do you want to Logout ?</h3>
+                        </div>
+                        <div class="bottom">
+                            <figure>
+                                <form method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <button type="submit" name="btn_logout" class="btn btn-danger">Yes</button>
+                                        <button type="submit" name="btn_cancle" class="btn btn-secondary">No</button>
+                                    </div>
+                                </form>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

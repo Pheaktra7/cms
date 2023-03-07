@@ -4,4 +4,15 @@
 
 <?php 
 // @Connection database
-// $con = new mysqli('','root','','');
+    $con = new mysqli('localhost','root','','cms');
+
+    function get_logo($status){
+        global $con;
+        $sql = "SELECT thumbnail FROM `tbl_logo` WHERE `status` = '$status' LIMIT 1";
+        $res = $con->query($sql);
+
+        $row = mysqli_fetch_assoc($res);
+        return $row['thumbnail'];
+    }
+
+?>

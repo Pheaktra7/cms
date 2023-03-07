@@ -137,20 +137,6 @@
     }
     login();
 
-    function getAdminData(){
-        global $con;
-        $admin_id = $_SESSION['user'];
-        $sql_admin = "SELECT username,profile FROM `tbl_user` WHERE $admin_id";
-        $res = $con->query($sql_admin);
-        $row = $res->fetch_assoc();
-        echo'
-            <img width="50" src="assets/icon/'.$row['profile'].'" alt="'.$row['profile'].'">
-            <h6>Welcome to Admin '.$row['username'].'</h6>
-        ';
-    }
-
-    getAdminData();
-
     //add logo
 
     function add_logo(){
@@ -161,18 +147,53 @@
             if(!empty($status) && !empty($logo)){
                 $logo = date('YmdHis').'-'.$logo;
                 $path = 'assets/icon/'.$logo;
-                move_uploaded_file($_FILES['thumbnail']['name'],$path);
+                move_uploaded_file($_FILES['thumbnail']['tmp_name'],$path);
                 $sql = "INSERT INTO `tbl_logo` (`status`, `thumbnail`) 
                 VALUES ('$status','$logo')";
                 $res = $con->query($sql);
                 if($res){
-                    echo 'yes';
+                    echo '
+                        <script>
+                            $(document).ready(function(){
+                                swal({
+                                    title: "Add Success",
+                                    text: "Logo Add Successfully",
+                                    icon: "success",
+                                    button: "Ok",
+                                });
+                            });
+                        </script>
+                    ';
                 }
                 else {
-                    echo 'no';
+                    echo '
+                        <script>
+                            $(document).ready(function(){
+                                swal({
+                                    title: "Add Error",
+                                    text: "Logo Cannot Add",
+                                    icon: "error",
+                                    button: "try again",
+                                });
+                            });
+                        </script>
+                    ';
                 }
             }
         }
     }
     add_logo();
+
+    // logout 
+    function logout() {
+        if(isset($_POST['btn_logout'])){
+            unset($_SESSION['user']);
+            header('location: login.php');
+        }
+        if(isset($_POST['btn_cancle'])){
+            header('location: index.php');
+        }
+    }
+
+    logout();
 ?>
